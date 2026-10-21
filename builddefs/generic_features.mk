@@ -55,6 +55,7 @@ GENERIC_FEATURES = \
     STENO \
     SWAP_HANDS \
     TAP_DANCE \
+    TELEPHONY \
     TRI_LAYER \
     VIA \
     VIRTSER \

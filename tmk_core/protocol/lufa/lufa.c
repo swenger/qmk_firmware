@@ -135,6 +135,10 @@ USB_ClassInfo_CDC_Device_t cdc_device = {
 // clang-format on
 #endif
 
+#ifdef TELEPHONY_ENABLE
+static volatile uint8_t telephony_led_state = 0;
+#endif
+
 #ifdef RAW_ENABLE
 
 /** \brief Raw HID Send
@@ -352,6 +356,11 @@ void EVENT_USB_Device_ConfigurationChanged(void) {
     ConfigSuccess &= Endpoint_ConfigureEndpoint((PLOVER_HID_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, PLOVER_HID_EPSIZE, 1);
 #endif
 
+#ifdef TELEPHONY_ENABLE
+    /* Setup telephony endpoint */
+    ConfigSuccess &= Endpoint_ConfigureEndpoint((TELEPHONY_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, TELEPHONY_EPSIZE, 1);
+#endif
+
 #ifdef CONSOLE_ENABLE
     /* Setup console endpoint */
     ConfigSuccess &= Endpoint_ConfigureEndpoint((CONSOLE_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, CONSOLE_EPSIZE, 1);
@@ -452,6 +461,20 @@ void EVENT_USB_Device_ControlRequest(void) {
                         Endpoint_ClearOUT();
                         Endpoint_ClearStatusStage();
                         break;
+#ifdef TELEPHONY_ENABLE
+                    case TELEPHONY_INTERFACE:
+                        Endpoint_ClearSETUP();
+
+                        while (!(Endpoint_IsOUTReceived())) {
+                            if (USB_DeviceState == DEVICE_STATE_Unattached) return;
+                        }
+
+                        telephony_led_state = Endpoint_Read_8();
+
+                        Endpoint_ClearOUT();
+                        Endpoint_ClearStatusStage();
+                        break;
+#endif
                 }
             }
 
@@ -581,6 +604,16 @@ void send_plover_hid(report_plover_hid_t *report) {
     send_report(PLOVER_HID_IN_EPNUM, report, sizeof(report_plover_hid_t));
 #endif
 }
+
+#ifdef TELEPHONY_ENABLE
+void send_telephony(report_telephony_t *report) {
+    send_report(TELEPHONY_IN_EPNUM, report, sizeof(report_telephony_t));
+}
+
+uint8_t telephony_leds(void) {
+    return telephony_led_state;
+}
+#endif
 
 /*******************************************************************************
  * sendchar

@@ -63,6 +63,10 @@
 #    define CDC_OUT_CAPACITY USB_DEFAULT_BUFFER_CAPACITY
 #endif
 
+#if !defined(TELEPHONY_IN_CAPACITY)
+#    define TELEPHONY_IN_CAPACITY USB_DEFAULT_BUFFER_CAPACITY
+#endif
+
 #define CDC_SIGNALING_DUMMY_CAPACITY 1
 
 typedef enum {
@@ -105,6 +109,9 @@ typedef enum {
 #if defined(VIRTSER_ENABLE)
     USB_ENDPOINT_IN_CDC_DATA,
     USB_ENDPOINT_IN_CDC_SIGNALING,
+#endif
+#if defined(TELEPHONY_ENABLE)
+    USB_ENDPOINT_IN_TELEPHONY,
 #endif
     USB_ENDPOINT_IN_COUNT,
 /* All non shared endpoints have to be consequtive numbers starting from 0, so
