@@ -203,26 +203,26 @@ typedef struct {
     uint8_t data[8];
 } PACKED report_plover_hid_t;
 
-/* Telephony buttons, in the order of TelephonyReport in usb_descriptor.c */
+/* Telephony buttons, in the order of TelephonyReport in usb_descriptor.c: OOC then OSC */
 enum telephony_button_bits {
     TELEPHONY_HOOK_SWITCH   = (1 << 0),
-    TELEPHONY_FLASH         = (1 << 1),
-    TELEPHONY_HOLD          = (1 << 2),
-    TELEPHONY_REDIAL        = (1 << 3),
-    TELEPHONY_DROP          = (1 << 4),
-    TELEPHONY_SPEAKER_PHONE = (1 << 5),
-    TELEPHONY_PHONE_MUTE    = (1 << 6),
+    TELEPHONY_HOLD          = (1 << 1),
+    TELEPHONY_SPEAKER_PHONE = (1 << 2),
+    TELEPHONY_PHONE_MUTE    = (1 << 3),
+    TELEPHONY_FLASH         = (1 << 4),
+    TELEPHONY_REDIAL        = (1 << 5),
+    TELEPHONY_DROP          = (1 << 6),
 };
 
-/* Telephony LEDs, set by the host */
+/* Telephony LEDs, set by the host; bits 0–3 match the corresponding button bits */
 enum telephony_led_bits {
-    TELEPHONY_LED_MUTE            = (1 << 0),
-    TELEPHONY_LED_OFF_HOOK        = (1 << 1),
-    TELEPHONY_LED_RING            = (1 << 2),
-    TELEPHONY_LED_MESSAGE_WAITING = (1 << 3),
-    TELEPHONY_LED_SPEAKER         = (1 << 4),
-    TELEPHONY_LED_HEAD_SET        = (1 << 5),
-    TELEPHONY_LED_HOLD            = (1 << 6),
+    TELEPHONY_LED_OFF_HOOK        = (1 << 0),
+    TELEPHONY_LED_HOLD            = (1 << 1),
+    TELEPHONY_LED_SPEAKER         = (1 << 2),
+    TELEPHONY_LED_MUTE            = (1 << 3),
+    TELEPHONY_LED_RING            = (1 << 4),
+    TELEPHONY_LED_MESSAGE_WAITING = (1 << 5),
+    TELEPHONY_LED_HEAD_SET        = (1 << 6),
     TELEPHONY_LED_MICROPHONE      = (1 << 7),
 };
 

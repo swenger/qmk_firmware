@@ -510,26 +510,26 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM TelephonyReport[] = {
         HID_RI_LOGICAL_MINIMUM(8, 0x00),
         HID_RI_LOGICAL_MAXIMUM(8, 0x01),
         HID_RI_REPORT_SIZE(8, 0x01),
-        HID_RI_USAGE(8, 0x20),         // Hook Switch
-        HID_RI_USAGE(8, 0x21),         // Flash
-        HID_RI_USAGE(8, 0x23),         // Hold
-        HID_RI_USAGE(8, 0x24),         // Redial
-        HID_RI_USAGE(8, 0x26),         // Drop
-        HID_RI_USAGE(8, 0x2B),         // Speaker Phone
-        HID_RI_USAGE(8, 0x2F),         // Phone Mute
+        HID_RI_USAGE(8, 0x20),         // Hook Switch    (OOC)
+        HID_RI_USAGE(8, 0x23),         // Hold           (OOC)
+        HID_RI_USAGE(8, 0x2B),         // Speaker Phone  (OOC)
+        HID_RI_USAGE(8, 0x2F),         // Phone Mute     (OOC)
+        HID_RI_USAGE(8, 0x21),         // Flash          (OSC)
+        HID_RI_USAGE(8, 0x24),         // Redial         (OSC)
+        HID_RI_USAGE(8, 0x26),         // Drop           (OSC)
         HID_RI_REPORT_COUNT(8, 0x07),
         HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
         HID_RI_REPORT_COUNT(8, 0x01),
         HID_RI_INPUT(8, HID_IOF_CONSTANT),
 
         HID_RI_USAGE_PAGE(8, 0x08),    // LED
-        HID_RI_USAGE(8, 0x09),         // Mute
         HID_RI_USAGE(8, 0x17),         // Off-Hook
+        HID_RI_USAGE(8, 0x20),         // Hold
+        HID_RI_USAGE(8, 0x1E),         // Speaker
+        HID_RI_USAGE(8, 0x09),         // Mute
         HID_RI_USAGE(8, 0x18),         // Ring
         HID_RI_USAGE(8, 0x19),         // Message Waiting
-        HID_RI_USAGE(8, 0x1E),         // Speaker
         HID_RI_USAGE(8, 0x1F),         // Head Set
-        HID_RI_USAGE(8, 0x20),         // Hold
         HID_RI_USAGE(8, 0x21),         // Microphone
         HID_RI_REPORT_COUNT(8, 0x08),
         HID_RI_OUTPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE | HID_IOF_NON_VOLATILE),

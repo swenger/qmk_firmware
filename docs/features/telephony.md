@@ -25,21 +25,20 @@ It uses a dedicated endpoint, so on MCUs with few endpoints it may not fit along
 
 The input report is a bitmask of the following buttons:
 
-|Bit                      |Telephony Usage|
-|-------------------------|---------------|
-|`TELEPHONY_HOOK_SWITCH`  |Hook Switch    |
-|`TELEPHONY_FLASH`        |Flash          |
-|`TELEPHONY_HOLD`         |Hold           |
-|`TELEPHONY_REDIAL`       |Redial         |
-|`TELEPHONY_DROP`         |Drop           |
-|`TELEPHONY_SPEAKER_PHONE`|Speaker Phone  |
-|`TELEPHONY_PHONE_MUTE`   |Phone Mute     |
+|Bit                      |Telephony Usage|Type|
+|-------------------------|---------------|----|
+|`TELEPHONY_HOOK_SWITCH`  |Hook Switch    |OOC |
+|`TELEPHONY_HOLD`         |Hold           |OOC |
+|`TELEPHONY_SPEAKER_PHONE`|Speaker Phone  |OOC |
+|`TELEPHONY_PHONE_MUTE`   |Phone Mute     |OOC |
+|`TELEPHONY_FLASH`        |Flash          |OSC |
+|`TELEPHONY_REDIAL`       |Redial         |OSC |
+|`TELEPHONY_DROP`         |Drop           |OSC |
 
 Each bit is a level, not an event.
-Hook Switch and Phone Mute are on/off controls:
-set Hook Switch to answer or stay in a call and clear it to hang up,
-set Phone Mute to mute and clear it to unmute.
-Momentary buttons such as Flash, Redial and Drop are set on press and cleared on release.
+On/Off Controls (OOC) such as Hook Switch carry state:
+set Hook Switch to answer or stay in a call and clear it to hang up.
+One Shot Controls (OSC) such as Flash are set on press and cleared on release.
 Which usages are honored depends on the app.
 
 ## LEDs {#leds}
@@ -48,13 +47,13 @@ The host sets the following bits in the output report:
 
 |Bit                            |LED Usage      |
 |-------------------------------|---------------|
-|`TELEPHONY_LED_MUTE`           |Mute           |
 |`TELEPHONY_LED_OFF_HOOK`       |Off-Hook       |
+|`TELEPHONY_LED_HOLD`           |Hold           |
+|`TELEPHONY_LED_SPEAKER`        |Speaker        |
+|`TELEPHONY_LED_MUTE`           |Mute           |
 |`TELEPHONY_LED_RING`           |Ring           |
 |`TELEPHONY_LED_MESSAGE_WAITING`|Message Waiting|
-|`TELEPHONY_LED_SPEAKER`        |Speaker        |
 |`TELEPHONY_LED_HEAD_SET`       |Head Set       |
-|`TELEPHONY_LED_HOLD`           |Hold           |
 |`TELEPHONY_LED_MICROPHONE`     |Microphone     |
 
 ## Example {#example}
